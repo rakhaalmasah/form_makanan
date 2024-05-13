@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Form Menu Makanan</title>
+    {% include 'components/style.html' %}
+</head>
+
+<body style="border-radius: 0px;background: rgb(174, 210, 255);">
+    {% include 'components/header.html' %}
+    <div>
+        <div class="container">
+            <form method="post" action="">
+                <div class="row" style="border-width: 0px; border-style: none;">
+                    <div class="col-md-1 offset-md-0 text-center d-md-flex justify-content-md-center align-items-md-center" style="background: var(--bs-gray-200); text-align: center; border-radius: 0px; border-width: 0.4px; border-style: groove;">
+                        <h4 class="fw-bold">{{ judul_tabel[0]['teks'] }}</h4>
+                    </div>
+                    <div class="col d-md-flex justify-content-md-center align-items-md-center" style="background: var(--bs-gray-200); text-align: center; border-radius: 0px; border-width: 0.4px; border-style: groove;">
+                        <h4 class="fw-bold text-center">{{ judul_tabel[1]['teks'] }}</h4>
+                    </div>
+                    <div class="col-md-2 d-md-flex justify-content-md-center align-items-md-center" style="background: var(--bs-gray-200); text-align: center; border-radius: 0px; border-width: 0.4px; border-style: groove;">
+                        <h4 class="fw-bold text-center">{{ judul_tabel[2]['teks'] }}</h4>
+                    </div>
+                    <div class="col-md-2 d-md-flex justify-content-md-center align-items-md-center" style="background: var(--bs-gray-200); text-align: center; border-radius: 0px; border-width: 0.4px; border-style: groove;">
+                        <h4 class="fw-bold text-center">{{ judul_tabel[3]['teks'] }}</h4>
+                    </div>
+                    <div class="col-md-3 d-md-flex justify-content-md-center align-items-md-center" style="background: var(--bs-gray-200); text-align: center; border-radius: 0px; border-width: 0.4px; border-style: groove;">
+                        <h4 class="fw-bold text-center">{{ judul_tabel[4]['teks'] }}</h4>
+                    </div>
+                </div>                
+                {% for menu in menu_makanan %}
+                <div class="row" style="border-width: 0px;border-style: none;">
+                    <div class="col-md-1 text-center d-md-flex justify-content-md-start align-items-md-center" style="background: var(--bs-body-bg);text-align: center;border-radius: 0px;border-width: 0.4px;border-style: groove;">
+                        <h5 class="text-center">{{ menu['nomor'] }}</h5>
+                    </div>
+                    <div class="col d-md-flex justify-content-md-start align-items-md-center" style="background: var(--bs-body-bg);text-align: center;border-radius: 0px;border-width: 0.4px;border-style: groove;">
+                        <h5 class="text-center">{{ menu['teks'] }}</h5>
+                    </div>
+                    <div class="col-md-2 d-md-flex justify-content-md-start align-items-md-center" style="background: var(--bs-body-bg);text-align: center;border-radius: 0px;border-width: 0.4px;border-style: groove;">
+                        <h5 class="text-center">{{ menu.harga_formatted }}</h5>
+                    </div>
+                    <div class="col-md-2 d-md-flex justify-content-md-start align-items-md-center" style="background: var(--bs-body-bg);text-align: center;border-radius: 0px;border-width: 0.4px;border-style: groove;">
+                        <input class="form-control" type="number" name="qty" value="{{ menu['qty']|default(0) }}" min="0" step="1" style="font-size: 20px;margin: 6px;margin-top: 8px;margin-right: 16px;margin-bottom: 8px;margin-left: 16px;">
+                    </div>
+                    <div class="col-md-3 d-md-flex justify-content-md-start align-items-md-center" style="background: var(--bs-body-bg);text-align: center;border-radius: 0px;border-width: 0.4px;border-style: groove;">
+                        <h5 id="jumlah{{ menu['nomor'] }}"class="text-center">{{ menu.jumlah_formatted }}</h5>
+                    </div>                                    
+                </div>
+                {% endfor %}
+                <div class="row" style="border-width: 0px;border-style: none;">
+                    <div class="col-md-7 d-md-flex justify-content-md-start align-items-md-center" style="background: var(--bs-body-bg);text-align: center;border-radius: 0px;border-width: 0.4px;border-style: groove;">
+                        <h5 class="fw-bolder">Total</h5>
+                    </div>
+                    <div class="col-md-2 d-md-flex justify-content-md-start align-items-md-center justify-content-lg-center align-items-lg-center" style="background: var(--bs-body-bg);text-align: center;border-radius: 0px;border-width: 0.4px;border-style: groove;">
+                        <button class="btn btn-primary btn-lg fs-5 text-start" value="hitung"type="submit" style="text-align: center;margin: 6px;margin-top: 18px;margin-right: 0px;margin-bottom: 16px;margin-left: 1px;">Hitung</button>
+                    </div>
+                    <div class="col-md-3 d-md-flex justify-content-md-start align-items-md-center" style="background: var(--bs-body-bg);text-align: center;border-radius: 0px;border-width: 0.4px;border-style: groove;">
+                        <h5 class="text-center">
+                            {% if total_harga != 'Rp 0' %}
+                                {{ total_harga }}
+                            {% else %}
+                                Rp 0
+                            {% endif %}
+                        </h5>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% include 'components/footer.html' %}
+    {% include 'components/script.html' %}
+</body>
+
+</html>
